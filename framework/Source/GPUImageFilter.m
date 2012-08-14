@@ -94,10 +94,22 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
     return self;
 }
 
-- (id)initWithFragmentShaderFromFile:(NSString *)fragmentShaderFilename;
+- (id)initWithFragmentShaderFromFileInMainBundle:(NSString *)fragmentShaderFilename
 {
     NSString *fragmentShaderPathname = [[NSBundle mainBundle] pathForResource:fragmentShaderFilename ofType:@"fsh"];
-    NSString *fragmentShaderString = [NSString stringWithContentsOfFile:fragmentShaderPathname encoding:NSUTF8StringEncoding error:nil];
+    
+    if (!(self = [self initWithFragmentShaderFromFile:fragmentShaderPathname]))
+    {
+		return nil;
+    }
+    
+    return self;
+}
+
+
+- (id)initWithFragmentShaderFromFile:(NSString *)fragmentShaderFilename;
+{
+    NSString *fragmentShaderString = [NSString stringWithContentsOfFile:fragmentShaderFilename encoding:NSUTF8StringEncoding error:nil];
 
     if (!(self = [self initWithFragmentShaderFromString:fragmentShaderString]))
     {
