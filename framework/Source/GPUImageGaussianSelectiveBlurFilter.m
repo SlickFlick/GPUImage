@@ -31,6 +31,7 @@ NSString *const kGPUImageGaussianSelectiveBlurFragmentShaderString = SHADER_STRI
 
 @synthesize excludeCirclePoint = _excludeCirclePoint, excludeCircleRadius = _excludeCircleRadius, excludeBlurSize = _excludeBlurSize;
 @synthesize blurSize = _blurSize;
+@synthesize aspectRatio = _aspectRatio;
 
 - (id)init;
 {
@@ -74,7 +75,7 @@ NSString *const kGPUImageGaussianSelectiveBlurFragmentShaderString = SHADER_STRI
     if ( (!CGSizeEqualToSize(oldInputSize, inputTextureSize)) && (!hasOverriddenAspectRatio) )
     {
         _aspectRatio = (inputTextureSize.width / inputTextureSize.height);
-        [selectiveFocusFilter setFloat:_aspectRatio forUniform:@"aspectRatio"];
+        [selectiveFocusFilter setFloat:_aspectRatio forUniformName:@"aspectRatio"];
     }
 }
 
@@ -94,26 +95,26 @@ NSString *const kGPUImageGaussianSelectiveBlurFragmentShaderString = SHADER_STRI
 - (void)setExcludeCirclePoint:(CGPoint)newValue;
 {
     _excludeCirclePoint = newValue;
-    [selectiveFocusFilter setPoint:newValue forUniform:@"excludeCirclePoint"];
+    [selectiveFocusFilter setPoint:newValue forUniformName:@"excludeCirclePoint"];
 }
 
 - (void)setExcludeCircleRadius:(CGFloat)newValue;
 {
     _excludeCircleRadius = newValue;
-    [selectiveFocusFilter setFloat:newValue forUniform:@"excludeCircleRadius"];
+    [selectiveFocusFilter setFloat:newValue forUniformName:@"excludeCircleRadius"];
 }
 
 - (void)setExcludeBlurSize:(CGFloat)newValue;
 {
     _excludeBlurSize = newValue;
-    [selectiveFocusFilter setFloat:newValue forUniform:@"excludeBlurSize"];
+    [selectiveFocusFilter setFloat:newValue forUniformName:@"excludeBlurSize"];
 }
 
 - (void)setAspectRatio:(CGFloat)newValue;
 {
     hasOverriddenAspectRatio = YES;
     _aspectRatio = newValue;    
-    [selectiveFocusFilter setFloat:_aspectRatio forUniform:@"aspectRatio"];
+    [selectiveFocusFilter setFloat:_aspectRatio forUniformName:@"aspectRatio"];
 }
 
 @end

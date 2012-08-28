@@ -29,15 +29,16 @@
 
     BOOL capturePaused;
     GPUImageRotationMode outputRotation;
+    dispatch_semaphore_t frameRenderingSemaphore;
 
     id<GPUImageVideoCameraDelegate> _delegate;
 }
 
 /// The AVCaptureSession used to capture from the camera
-@property(readonly, retain) AVCaptureSession *captureSession;
+@property(readonly, retain, nonatomic) AVCaptureSession *captureSession;
 
-/// This enables capture session preset to be changed on the fly
-@property (readwrite) NSString *captureSessionPreset;
+/// This enables the capture session preset to be changed on the fly
+@property (readwrite, nonatomic, copy) NSString *captureSessionPreset;
 
 /// This sets the frame rate of the camera (iOS 5 and above only)
 /**
@@ -57,7 +58,7 @@
 /// This determines the rotation applied to the output image, based on the source material
 @property(readwrite, nonatomic) UIInterfaceOrientation outputImageOrientation;
 
-@property(nonatomic,retain) id<GPUImageVideoCameraDelegate> delegate;
+@property(nonatomic, retain) id<GPUImageVideoCameraDelegate> delegate;
 
 /// @name Initialization and teardown
 
