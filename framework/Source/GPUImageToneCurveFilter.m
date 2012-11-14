@@ -37,9 +37,9 @@
     self = [super init];
 	if (self != nil)
 	{
-        NSString *bundleCurvePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: curveFile];
+//        NSString *bundleCurvePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: curveFile];
         
-        NSFileHandle* file = [NSFileHandle fileHandleForReadingAtPath: bundleCurvePath];
+        NSFileHandle* file = [NSFileHandle fileHandleForReadingAtPath: curveFile];
         
         if (file == nil)
         {
