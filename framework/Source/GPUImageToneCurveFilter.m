@@ -183,6 +183,15 @@ NSString *const kGPUImageToneCurveFragmentShaderString = SHADER_STRING
     return self;
 }
 
+- (id)initWithACVURL:(NSURL*)curveFileURL
+{
+    if (!(self = [super initWithFragmentShaderFromString:kGPUImageToneCurveFragmentShaderString]))
+    {
+		return nil;
+    }
+    return self;
+}
+
 - (void)setPointsWithACV:(NSString*)curveFile
 {
     GPUImageACVFile *curve = [[GPUImageACVFile alloc] initWithCurveFile:curveFile];
@@ -193,6 +202,11 @@ NSString *const kGPUImageToneCurveFragmentShaderString = SHADER_STRING
     [self setBlueControlPoints:curve.blueCurvePoints];
     
     curve = nil;
+}
+
+- (void)setPointsWithACVURL:(NSURL*)curveFileURL
+{
+    
 }
 
 - (void)dealloc
