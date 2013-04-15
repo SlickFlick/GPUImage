@@ -168,9 +168,8 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size)
 {
     GPUImageFilter *filter = (__bridge_transfer GPUImageFilter*)info;
     
-    if (0 != [filter renderTarget])
-    {
-        CVPixelBufferUnlockBaseAddress([filter renderTarget], 0);
+    CVPixelBufferUnlockBaseAddress([filter renderTarget], 0);
+    if ([filter renderTarget]) {
         CFRelease([filter renderTarget]);
     }
 
